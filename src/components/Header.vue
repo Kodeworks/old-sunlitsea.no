@@ -1,7 +1,7 @@
 <template>
   <header>
     <div>
-      <img src="../assets/logo.svg">
+      <img src="../assets/logo.svg" alt="Sunlit Sea logo">
     </div>
 
     <div>

@@ -7,11 +7,14 @@ module.exports = {
                 "sls-yellow": {
                     DEFAULT: "#FFF1A3",
                 }
+            },
+            fontFamily: {
+                heading: ['Everett', 'sans-serif']
+            },
+            height: {
+                "3d-vis": '1200vh'
             }
         },
-        fontFamily: {
-            heading: ['Everett', 'sans-serif']
-        }
     },
     variants: {
         extend: {},
