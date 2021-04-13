@@ -5,10 +5,10 @@
       prefabrication and a very clever design</p>
     <div>
       <div>
-        <img src="" alt="">
+        <img src="" alt=""/>
       </div>
       <div>
-        <img src="" alt="">
+        <img src="" alt=""/>
         <a href="https://iiot.kodeworks.no">Preview a virtual installation 👉</a>
       </div>
     </div>

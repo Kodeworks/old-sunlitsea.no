@@ -6,6 +6,9 @@ module.exports = {
             colors: {
                 "sls-yellow": {
                     DEFAULT: "#FFF1A3",
+                },
+                black: {
+                    DEFAULT: "#1A1A1A"
                 }
             },
             fontFamily: {
