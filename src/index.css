@@ -1,0 +1,7 @@
+/*! @import */
+@import "./assets/styles/everett.scss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
