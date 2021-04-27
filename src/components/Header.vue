@@ -1,35 +1,54 @@
 <template>
   <header>
+    <video autoplay muted loop poster="../assets/images/jumbotronBackgroundVideoPoster.png" >
+      <source src="../assets/images/jumbotronBackgroundVideo.mp4" type="video/mp4">
+    </video>
+
     <div>
       <img src="../assets/logo.svg" alt="Sunlit Sea logo"/>
     </div>
 
     <div>
-      <h1>
-        Floating <span>Solar</span> Solutions
-      </h1>
-
       <p>
         Sunlit Sea is a technology provider to the floating solar industry.
-        Our goal is to achieve the lowest cost for floating solar electricity
-        which is achieved by combining prefabrication and a very clever design
       </p>
+      <ArrowDown />
     </div>
   </header>
 </template>
 
 <script>
+import ArrowDown from "@/components/ArrowDown";
 export default {
   name: 'Header',
+  components: {ArrowDown},
 }
 </script>
 
 <style scoped lang="scss">
+@keyframes upndown {
+  from {
+    margin-bottom: 0;
+  }
+
+  to {
+    margin-bottom: -20px;
+  }
+}
+
 header {
-  @apply flex flex-col h-full p-10 text-white;
+  @apply flex flex-col h-screen p-16 text-white;
+
+  // "Background" video
+  video {
+    @apply absolute top-0 left-0 w-screen h-screen object-cover;
+
+    z-index: -1;
+    filter: brightness(0.5);
+  }
 
   /* Logo container*/
-  div:first-child {
+  div:first-of-type {
     @apply flex items-center h-8;
 
     img {
@@ -39,18 +58,24 @@ header {
 
   /* Text container */
   div:last-child {
-    @apply mt-auto mb-8 space-y-4 md:space-y-8 md:px-20 md:mb-44;
-
-    h1 {
-      @apply text-6xl font-semibold font-heading;
-
-      span {
-        @apply text-sls-yellow;
-      }
-    }
+    @apply mt-auto flex;
 
     p {
-      @apply max-w-screen-lg text-xl;
+      @apply max-w-screen-lg text-4xl font-heading w-2/5 mb-12;
+      line-height: 1.3em;
+    }
+
+    // Arrow down
+    svg {
+      @apply ml-auto self-end;
+
+      animation-name: upndown;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+      animation-direction: alternate;
+
+      height: 2.4rem;
     }
   }
 }
