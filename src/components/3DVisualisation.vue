@@ -5,9 +5,15 @@
 </template>
 
 <script>
+import script from "@/visualisation/script.ts";
+
 export default {
-  name: "3DVisualisation"
+  name: "3DVisualisation",
+  mounted() {
+    script("#container");
+  }
 }
+
 </script>
 
 <style scoped lang="scss">
