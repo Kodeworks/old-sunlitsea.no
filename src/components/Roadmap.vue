@@ -14,10 +14,10 @@ export default {
 
 <style scoped lang="scss">
   section {
-    @apply h-screen overflow-x-scroll p-40 bg-black;
+    @apply h-screen overflow-x-scroll py-72 pl-96 bg-black;
 
-    img {
-      @apply h-full max-w-none;
+    svg {
+      @apply max-w-none h-full;
     }
   }
 </style>
