@@ -20,7 +20,7 @@ section {
   @apply h-screen flex-col flex justify-center w-1/3 mx-auto;
 
   h2 {
-    @apply text-4xl font-heading md:text-5xl;
+    @apply text-4xl font-heading md:text-5xl mb-4;
   }
 }
 </style>
