@@ -2,7 +2,6 @@
   <section>
     <iframe
         src="https://www.youtube-nocookie.com/embed/Bv4ve25-6_g"
-        frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
     />
@@ -14,7 +13,7 @@
         Sunlit Sea recently deployed prototype 2 of our floating solar
         solution in the freezing water of the Oslo Fjord. Even at this stage,
         it's easy to see that our end game logistics solution seems within
-        reach
+        reach.
       </p>
     </div>
   </section>

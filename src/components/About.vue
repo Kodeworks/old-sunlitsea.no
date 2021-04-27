@@ -17,7 +17,7 @@ export default {
 
 <style scoped lang="scss">
 section {
-  @apply h-screen flex-col flex justify-center w-1/3 mx-auto;
+  @apply h-screen lg:h-auto flex-col flex justify-center w-1/3 mx-auto lg:my-64;
 
   h2 {
     @apply text-4xl font-heading md:text-5xl mb-4;

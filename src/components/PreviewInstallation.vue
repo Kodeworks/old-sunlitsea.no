@@ -32,6 +32,7 @@ section {
 
   h2 {
     @apply text-5xl text-center;
+    color: #4B5494;
   }
 
   h2, p {

@@ -25,7 +25,9 @@ export default {
 
 <style scoped lang="scss">
 section {
-  @apply px-8 py-12 space-y-8 md:h-screen lg:px-24 lg:pt-0 lg:pb-0 lg:grid lg:grid-cols-2 lg:gap-32 lg:space-y-0;
+  @apply px-8 py-12 space-y-8 md:h-screen lg:px-24 lg:pt-0 lg:pb-0 lg:grid lg:grid-cols-2 lg:gap-32 lg:space-y-0 text-white;
+
+  background: radial-gradient(circle at 25% center, lighten(black, 15%) 0%, black 50%);
 
   div {
     @apply space-y-4 md:space-y-8 lg:self-center;

@@ -68,14 +68,14 @@ export default {
 
 <style scoped lang="scss">
 section {
-  @apply px-8 py-12 md:h-screen lg:px-24 lg:pt-0 flex flex-col h-screen;
+  @apply px-8 py-12 md:h-screen lg:px-24 lg:pt-0 flex flex-col h-screen lg:h-auto;
 
   h2 {
     @apply text-4xl font-heading md:text-5xl;
   }
 
   & > div {
-    @apply flex my-auto h-1/2 overflow-x-auto;
+    @apply flex my-auto h-1/2 overflow-x-auto lg:my-44;
   }
 }
 </style>
