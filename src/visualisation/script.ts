@@ -109,63 +109,24 @@ export default async (containerSelector: string) => {
 
     const labelMaterials = extractMaterials(topLabel, middleLabel, bottomLabel);
 
-    /**
-     * SCROLL HANDLER
-     */
-
-    const _event = {
-        y: 0,
-        deltaY: 0
-    };
-
-    let percentage = 0;
-
     const parentContainer: HTMLElement = document.querySelector(containerSelector)! as HTMLElement;
 
-    const maxHeight = parentContainer.clientHeight * 0.45;
+    let scrollPercentage = 0;
 
-    const onWheel = (e: WheelEvent) => {
-        // Firefox doesn't want to play nice with the other kids, so they use a special DOM_DELTA_LINE instead of the standard DOM_DELTA_PIXEL.
-        // Multiply by 16 to assume a line is 16 pixels high. Technically not correct, but suffices.
-        if (e.deltaMode === e.DOM_DELTA_LINE) {
-            _event.deltaY = (e.deltaY * 16) * -1;
-        } else if (e.deltaMode === e.DOM_DELTA_PIXEL) {
-            _event.deltaY = e.deltaY * -1;
+    const onScroll = () => {
+
+        const rect = parentContainer.getBoundingClientRect();
+        const inView = rect.top <= 0  && rect.bottom >= 0;
+
+        if (!inView) {
+            return;
         }
-        _event.deltaY *= 0.5; // WOAH! Slow down cowboy
 
-        scroll();
-    }
-
-    const scroll = () => {
-        // Limit scroll top
-        if ((_event.y + _event.deltaY) > 0) {
-            _event.y = 0;
-            // Limit scroll bottom
-        } else if ((-(_event.y + _event.deltaY)) >= maxHeight) {
-            _event.y = -maxHeight;
-        } else {
-            _event.y += _event.deltaY;
-        }
+        const percent = -rect.top / rect.height;
+        scrollPercentage = percent;
     };
 
-    let touchStartY = 0;
-
-    const onTouchStart = (e: TouchEvent) => {
-        const t = e.targetTouches[0];
-        touchStartY = t.pageY;
-    }
-
-    const onTouchMove = (e: TouchEvent) => {
-        const t = e.targetTouches[0];
-        _event.deltaY = (t.pageY - touchStartY) * 5;
-        touchStartY = t.pageY;
-        scroll();
-    }
-
-    parentContainer.addEventListener("wheel", onWheel, { passive: false });
-    parentContainer.addEventListener("touchstart", onTouchStart, { passive: false });
-    parentContainer.addEventListener("touchmove", onTouchMove, { passive: false });
+    document.addEventListener("scroll", onScroll, { passive: false });
 
     /**
      * TIMELINE
@@ -320,6 +281,9 @@ export default async (containerSelector: string) => {
     /**
      * PERFORM THE RENDERING
      */
+    
+    let animationPercentage = 0;
+
     const render = () => {
         requestAnimationFrame(render);
 
@@ -329,8 +293,8 @@ export default async (containerSelector: string) => {
             camera.position.z + 5,
         );
 
-        percentage = lerp(percentage, -_event.y, 0.20);
-        tl.seek(percentage * (TIMELINE_DURATION / maxHeight));
+        animationPercentage = lerp(animationPercentage, scrollPercentage, 0.1); // Smooth out the mapping from scrolling
+        tl.seek(animationPercentage * TIMELINE_DURATION);
 
         renderer.render(scene, camera);
     }

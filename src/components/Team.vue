@@ -22,42 +22,42 @@ export default {
           name: "Per Lindberg",
           role: "CEO",
           email: "per@sunlitsea.no",
-          imagePath: require("@/assets/images/IMG_1045.jpeg"),
+          imagePath: require("@/assets/images/previewImage1.png"),
           description: "Per lorem ipsum dolor sit amet consectur adsciptig et. With an exceptional great team and support from our partners we are fit for this job and ready to revolutionize ocean based floating solar."
         },
         {
           name: "Per Lindberg",
           role: "CEO",
           email: "per2@sunlitsea.no",
-          imagePath: require("@/assets/images/IMG_1045.jpeg"),
+          imagePath: require("@/assets/images/previewImage1.png"),
           description: "Per lorem ipsum dolor sit amet consectur adsciptig et. With an exceptional great team and support from our partners we are fit for this job and ready to revolutionize ocean based floating solar."
         },
         {
           name: "Per Lindberg",
           role: "CEO",
           email: "per3@sunlitsea.no",
-          imagePath: require("@/assets/images/IMG_1045.jpeg"),
+          imagePath: require("@/assets/images/previewImage1.png"),
           description: "Per lorem ipsum dolor sit amet consectur adsciptig et. With an exceptional great team and support from our partners we are fit for this job and ready to revolutionize ocean based floating solar."
         },
         {
           name: "Per Lindberg",
           role: "CEO",
           email: "per4@sunlitsea.no",
-          imagePath: require("@/assets/images/IMG_1045.jpeg"),
+          imagePath: require("@/assets/images/previewImage1.png"),
           description: "Per lorem ipsum dolor sit amet consectur adsciptig et. With an exceptional great team and support from our partners we are fit for this job and ready to revolutionize ocean based floating solar."
         },
         {
           name: "Per Lindberg",
           role: "CEO",
           email: "per5@sunlitsea.no",
-          imagePath: require("@/assets/images/IMG_1045.jpeg"),
+          imagePath: require("@/assets/images/previewImage1.png"),
           description: "Per lorem ipsum dolor sit amet consectur adsciptig et. With an exceptional great team and support from our partners we are fit for this job and ready to revolutionize ocean based floating solar."
         },
         {
           name: "Per Lindberg",
           role: "CEO",
           email: "per6@sunlitsea.no",
-          imagePath: require("@/assets/images/IMG_1045.jpeg"),
+          imagePath: require("@/assets/images/previewImage1.png"),
           description: "Per lorem ipsum dolor sit amet consectur adsciptig et. With an exceptional great team and support from our partners we are fit for this job and ready to revolutionize ocean based floating solar."
         },
       ]
