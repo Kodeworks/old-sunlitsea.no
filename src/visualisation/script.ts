@@ -1,4 +1,4 @@
-import { MathUtils, Object3D, } from "three";
+import { MathUtils, Object3D, AxesHelper, } from "three";
 
 // Something strange with this library, but this works and is how it's supposed to be used according to the documentation.
 // @ts-ignore
@@ -23,9 +23,9 @@ export default async (containerSelector: string) => {
     // Rotate to point towards us with corner
     [topGLTF, solarPanelGLTF, bottomGLTF].forEach(GLTF => GLTF.scene.rotation.y = Math.PI / 2);
 
-    const panelScenes = [solarPanelGLTF, topGLTF, bottomGLTF].map(e => e.scene);
+    const completeMainPanel = [solarPanelGLTF, topGLTF, bottomGLTF].map(e => e.scene);
 
-    const [, spotlight] = setupLights(scene);
+    setupLights(scene);
 
     /**
      * Text labels
@@ -52,10 +52,6 @@ export default async (containerSelector: string) => {
     const bottomObj = new Object3D();
     const neighbourObj = new Object3D();
 
-    // obj3d.add(group);
-    //
-    // scene.add(obj3d);
-
     topLabel.position.x += 0.25;
     topLabel.position.z -= 0.25;
     topLabel.rotateY(Math.PI / 4);
@@ -71,14 +67,15 @@ export default async (containerSelector: string) => {
     bottomLabel.rotateY(Math.PI / 4);
 
     topObj.add(topLabel, solarPanelGLTF.scene);
-
     middleObj.add(middleLabel, topGLTF.scene);
+    bottomObj.add(bottomLabel, bottomGLTF.scene);    
 
-    bottomObj.add(bottomLabel, bottomGLTF.scene);
+    topObj.rotateY(-Math.PI / 4);
+    middleObj.rotateY(-Math.PI / 4);
+    bottomObj.rotateY(-Math.PI / 4);
 
     neighbourObj.position.x = 10;
-    neighbourObj.position.z = -10;
-    neighbourObj.rotation.y = -Math.PI * 0.25; // Edge with notch pointing at camera
+    neighbourObj.rotation.y = -Math.PI * 0.5; // Edge with notch pointing at camera
 
     neighbourObj.add(neighbourGLTF.scene);
 
@@ -86,13 +83,8 @@ export default async (containerSelector: string) => {
      * Camera settings
      */
 
-// The X axis is red. The Y axis is green. The Z axis is blue
-
-    // const controls = new OrbitControls(camera, renderer.domElement);
-    // controls.minDistance = 2;
-    // controls.maxDistance = 100;
-
-
+    const axesHelper = new AxesHelper(5);
+    scene.add(axesHelper);
     /**
      * ADD EM ALL TO THE SCENE
      */
@@ -143,7 +135,7 @@ export default async (containerSelector: string) => {
 
     // Spin the main panel
     tl.add({
-        targets: panelScenes.map(e => e.rotation),
+        targets: completeMainPanel.map(e => e.rotation),
         y: -Math.PI * 0.25,
         duration: 1000,
     })
@@ -165,9 +157,9 @@ export default async (containerSelector: string) => {
     // Move camera out
     tl.add({
         targets: camera.position,
-        x: 4,
-        y: 2,
-        z: 4,
+        x: 0,
+        y: 1.5,
+        z: 6,
         duration: 1000,
         update: () => camera.updateProjectionMatrix()
     }, 500);
@@ -203,80 +195,64 @@ export default async (containerSelector: string) => {
     // Move camera position for cables and tethering
     tl.add({
         targets: camera.position,
-        y: 0.15,
-        x: 1.75,
-        z: 1.75,
+        y: 1,
+        x: 0,
+        z: 4,
         duration: 400,
         update: () => camera.updateProjectionMatrix()
-    }, '-=250');
+    }, '-=250');    
 
-    // Ad-hoc solution to tilt the camera upwards without getting in a quarrel with Señor Euler
-    const camClone = camera.clone();
-    camClone.position.set(2, 0.15, 2);
-    camClone.lookAt(0, 0, 0);
-
-    // Tilt the camera upwards
-    tl.add({
-        targets: camera.rotation,
-        y: camClone.rotation.y,
-        x: camClone.rotation.x,
-        z: camClone.rotation.z,
-        duration: 250,
-        update: () => camera.updateProjectionMatrix()
-    }, '-=250');
-
-    // TODO: Fade in label about power
+    // // TODO: Fade in label about power
 
     // Slide the camera to the connectors
     tl.add({
         targets: camera.position,
-        x: 3.00,
-        z: 1.60,
+        x: 1.04,
         duration: 500,
     }, '-=0');
 
     // Slide in the other panel
     tl.add({
         targets: neighbourObj.position,
-        x: 1.4,
-        z: -1.4,
+        x: 2.06,
+        z: 0,
         y: 0,
         duration: 1000,
         easing: 'easeInOutExpo'
     }, '-=750');
 
-    // Slide it back out
-    tl.add({
-        targets: neighbourObj.position,
-        x: 10,
-        z: -10,
-        duration: 1000,
-        easing: 'easeInOutExpo'
-    });
+    // // Slide it back out
+    // tl.add({
+    //     targets: neighbourObj.position,
+    //     x: 10,
+    //     z: -10,
+    //     duration: 1000,
+    //     easing: 'easeInOutExpo'
+    // });
 
-    // Ad-hoc solution to tilt the camera upwards without getting in a quarrel with Señor Euler
-    camClone.position.set(2.5, 1.5, 2.5);
-    camClone.lookAt(0, 0, 0);
+    // // Ad-hoc solution to tilt the camera upwards without getting in a quarrel with Señor Euler
+    // camera.position.set(2.5, 1.5, 2.5);
+    // camera.lookAt(0, 0, 0);
 
-    // Move the camera up and out
-    tl.add({
-        targets: camera.position,
-        x: 2.5,
-        y: 1.5,
-        z: 2.5,
-        duration: 500,
-        update: () => camera.updateProjectionMatrix()
-    });
+    // // Move the camera up and out
+    // tl.add({
+    //     targets: camera.position,
+    //     x: 2.5,
+    //     y: 1.5,
+    //     z: 2.5,
+    //     duration: 500,
+    //     update: () => camera.updateProjectionMatrix()
+    // });
 
-    // Pan camera to origo
-    tl.add({
-        targets: camera.rotation,
-        x: camClone.rotation.x,
-        y: camClone.rotation.y,
-        z: camClone.rotation.z,
-        duration: 500,
-        update: () => camera.updateProjectionMatrix()
-    }, '-=500');
+    // // Pan camera to origo
+    // tl.add({
+    //     targets: camera.rotation,
+    //     x: camera.rotation.x,
+    //     y: camera.rotation.y,
+    //     z: camera.rotation.z,
+    //     duration: 500,
+    //     update: () => camera.updateProjectionMatrix()
+    // }, '-=500');
 
     /**
      * PERFORM THE RENDERING
@@ -284,14 +260,15 @@ export default async (containerSelector: string) => {
     
     let animationPercentage = 0;
 
+
     const render = () => {
         requestAnimationFrame(render);
 
-        spotlight.position.set(
-            camera.position.x + 5,
-            camera.position.y + 5,
-            camera.position.z + 5,
-        );
+        // spotlight.position.set(
+        //     camera.position.x + 5,
+        //     camera.position.y + 5,
+        //     camera.position.z + 5,
+        // );
 
         animationPercentage = lerp(animationPercentage, scrollPercentage, 0.1); // Smooth out the mapping from scrolling
         tl.seek(animationPercentage * TIMELINE_DURATION);

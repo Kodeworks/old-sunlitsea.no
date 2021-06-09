@@ -1,18 +1,30 @@
-import { Color, HemisphereLight, Scene, SpotLight } from "three";
+import { Color, Scene, PointLight } from "three";
 
-export default function (scene: Scene): [HemisphereLight, SpotLight] {
-    const hemisphereLight = new HemisphereLight(0xffeeb1, 0x080820, 4);
-    scene.add(hemisphereLight);
+export default function (scene: Scene): [PointLight] {
 
-    const spotlight = new SpotLight(0xffa95c, 4);
-    spotlight.position.set(-25, 25, 25);
-    spotlight.castShadow = true;
-    spotlight.shadow.bias = -0.0001;
-    spotlight.shadow.mapSize.width = 1024*4;
-    spotlight.shadow.mapSize.height = 1024*4;
-    scene.add(spotlight);
+    const frontMainPointLight = new PointLight(0xfcfce1);
+    frontMainPointLight.position.set(-1, 2, 5);
+    frontMainPointLight.intensity = 10;
+    frontMainPointLight.castShadow = true;
+    frontMainPointLight.shadow.bias = -0.001;
 
-    scene.background = new Color(0xdddddd);
+    const frontSecondaryPointLight = new PointLight(0xfffead);
+    frontSecondaryPointLight.position.set(2, 2, 5);
+    frontSecondaryPointLight.intensity= 2;
+    frontSecondaryPointLight.castShadow = true;
+    frontSecondaryPointLight.shadow.bias = -0.001;
 
-    return [hemisphereLight, spotlight];
+    const backPointLight = new PointLight(0xc4f3ff);
+    backPointLight.position.set(-6, 2, -5);
+    backPointLight.intensity = 1;
+    backPointLight.castShadow = true;
+    backPointLight.shadow.bias = -0.001;
+
+    scene.add(frontMainPointLight);
+    scene.add(frontSecondaryPointLight);
+    scene.add(backPointLight);
+
+    scene.background = new Color(0x222222);
+
+    return [frontMainPointLight];
 }

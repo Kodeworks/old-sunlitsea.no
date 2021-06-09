@@ -1,5 +1,4 @@
 import {
-    // AxesHelper,
     PCFSoftShadowMap,
     PerspectiveCamera,
     ReinhardToneMapping,
@@ -26,14 +25,8 @@ export default function (): [Scene, PerspectiveCamera, WebGLRenderer] {
         5000
     );
 
-    // const axesHelper = new AxesHelper(500);
-    // scene.add(axesHelper);
-
-    camera.position.set(2.5, 1, 2.5);
-
-    //const cameraTarget = new Vector3(0, 0, 0);
+    camera.position.set(0, 1, 4);
     const cameraTarget = new Vector3(0, 0, 0);
-
     camera.lookAt(cameraTarget);
 
     /**
