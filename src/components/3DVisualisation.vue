@@ -18,8 +18,8 @@ export default {
 
 <style scoped lang="scss">
 section {
-  @apply z-10 h-3d-vis;
-
+  @apply z-10;
+  height: 300vh;
   div {
     @apply sticky top-0 z-0 h-screen;
   }

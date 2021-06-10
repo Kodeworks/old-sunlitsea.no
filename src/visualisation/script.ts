@@ -1,8 +1,9 @@
-import { MathUtils, Object3D, Mesh, } from "three";
+import { MathUtils, Object3D, Mesh, RGB_S3TC_DXT1_Format, } from "three";
 
 // Something strange with this library, but this works and is how it's supposed to be used according to the documentation.
 // @ts-ignore
-import anime from 'animejs/lib/anime.es.js'
+import anime from 'animejs/lib/anime.es.js';
+const _ = require('lodash');
 
 import svgToGroup from "./svgToGroup";
 import loadModels from "./loader";
@@ -19,6 +20,7 @@ export default async (containerSelector: string) => {
     const [topGLTF, solarPanelGLTF, bottomGLTF] = await loadModels('Top.glb', 'SolarPanel.glb', 'Bottom.glb');
     const [neighbourGLTF] = await loadModels('PanelWithHinges.glb'); // the one sliding in (and opacity-ing :cat2:)
     const [cableGLTF] = await loadModels('Cable.glb');
+    const [fillerGLTF] = await loadModels('Filler.glb');
     // replace the above with CompletePanel.glb
 
     // Rotate to point towards us with corner
@@ -35,6 +37,9 @@ export default async (containerSelector: string) => {
     const topLabel = await svgToGroup("top.svg");
     const middleLabel = await svgToGroup("middle.svg");
     const bottomLabel = await svgToGroup("bottom.svg");
+    const hingeLabel = await svgToGroup("top.svg");
+    const cableLabel = await svgToGroup("middle.svg");
+    const fillerLabel = await svgToGroup("bottom.svg");
 
     topLabel.scale.y *= -1;
     topLabel.scale.multiplyScalar(0.01);
@@ -48,11 +53,25 @@ export default async (containerSelector: string) => {
     bottomLabel.scale.multiplyScalar(0.01);
     bottomLabel.position.y += 1.05;
 
+    hingeLabel.scale.y *= -1;
+    hingeLabel.scale.multiplyScalar(0.01);
+    hingeLabel.position.y += 1.05;
+    
+    cableLabel.scale.y *= -1;
+    cableLabel.scale.multiplyScalar(0.01);
+    cableLabel.position.y += 1.05;
+    
+    fillerLabel.scale.y *= -1;
+    fillerLabel.scale.multiplyScalar(0.01);
+    fillerLabel.position.y += 1.05;
+
+
     const topObj = new Object3D();
     const middleObj = new Object3D();
     const bottomObj = new Object3D();
     const neighbourObj = new Object3D();
     const cableObj = new Object3D();
+    const fillerObj = new Object3D();
 
     topLabel.position.x += 0.25;
     topLabel.position.z -= 0.25;
@@ -68,6 +87,12 @@ export default async (containerSelector: string) => {
     bottomLabel.position.y -= 0.70;
     bottomLabel.rotateY(Math.PI / 4);
 
+    hingeLabel.rotateY(Math.PI / 2);
+    cableLabel.rotateY(Math.PI / 2);
+    fillerLabel.rotateY(Math.PI / 2);
+
+
+
     topObj.add(topLabel, solarPanelGLTF.scene);
     middleObj.add(middleLabel, topGLTF.scene);
     bottomObj.add(bottomLabel, bottomGLTF.scene);    
@@ -79,9 +104,9 @@ export default async (containerSelector: string) => {
     neighbourObj.position.x = 10;
     neighbourObj.rotation.y = -Math.PI * 0.5; // Edge with notch pointing at camera
 
-    neighbourObj.add(neighbourGLTF.scene);
+    neighbourObj.add(hingeLabel, neighbourGLTF.scene);
 
-    cableObj.add(cableGLTF.scene);
+    cableObj.add(cableLabel, cableGLTF.scene);
     cableObj.rotateY(-Math.PI / 2);
     cableObj.position.x -= 0.01;
 
@@ -94,6 +119,22 @@ export default async (containerSelector: string) => {
         }
     });
 
+
+    fillerObj.add(fillerGLTF.scene);
+    fillerObj.rotateY(-Math.PI / 2);
+
+    const fillerMaterials = new Set();
+    fillerGLTF.scene.traverse((child) => {
+        if (child instanceof Mesh) {
+            fillerMaterials.add(child.material);
+            child.material.transparent = true;
+            child.material.opacity = 0;
+        }
+    });
+
+    const secondFillerObj = fillerObj.clone();
+    secondFillerObj.add(fillerLabel);
+    secondFillerObj.position.x += 2.05;
     /**
      * ADD EM ALL TO THE SCENE
      */
@@ -104,24 +145,21 @@ export default async (containerSelector: string) => {
 
     scene.add(neighbourObj);
     scene.add(cableObj);
+    scene.add(fillerObj);
+    scene.add(secondFillerObj);
 
     /**
      * Event handlers
      */
 
-   
-
     const labelMaterials = extractMaterials(topLabel, middleLabel, bottomLabel);
-
-
-
+    const secondLabelMaterials = extractMaterials(hingeLabel, cableLabel, fillerLabel);
 
     const parentContainer: HTMLElement = document.querySelector(containerSelector)! as HTMLElement;
 
     let scrollPercentage = 0;
 
-    const onScroll = () => {
-
+    const onScroll = () => { 
         const rect = parentContainer.getBoundingClientRect();
         const inView = rect.top <= 0  && rect.bottom >= 0;
 
@@ -133,13 +171,13 @@ export default async (containerSelector: string) => {
         scrollPercentage = percent;
     };
 
-    document.addEventListener("scroll", onScroll, { passive: false });
+    document.addEventListener("scroll", _.debounce(onScroll, 10), { passive: false });
 
     /**
      * TIMELINE
      * From anime.js
      */
-    const TIMELINE_DURATION = 6000;
+    const TIMELINE_DURATION = 9000;
 
     // Set up timeline
     const tl = anime.timeline({
@@ -243,6 +281,29 @@ export default async (containerSelector: string) => {
         opacity: 1,
         duration: 1000,        
     }, '-=0');
+
+    // Fade in filler
+    tl.add({
+        targets: fillerMaterials.values().next().value,
+        opacity: 1,
+        duration: 1000,
+    }, '-=0');
+
+
+    // Fade in second labels
+    tl.add({
+        targets: secondLabelMaterials,
+        opacity: 1,
+        duration: 500,
+    }, '-=0');
+
+    //Fade out second labels
+    tl.add({
+        targets: secondLabelMaterials,
+        opacity: 0,
+        duration: 250,
+    }, '+=250');
+   
 
     // // Slide it back out
     // tl.add({
