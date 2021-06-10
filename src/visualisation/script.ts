@@ -1,4 +1,4 @@
-import { MathUtils, Object3D, AxesHelper, } from "three";
+import { MathUtils, Object3D, Mesh, } from "three";
 
 // Something strange with this library, but this works and is how it's supposed to be used according to the documentation.
 // @ts-ignore
@@ -18,6 +18,7 @@ export default async (containerSelector: string) => {
 
     const [topGLTF, solarPanelGLTF, bottomGLTF] = await loadModels('Top.glb', 'SolarPanel.glb', 'Bottom.glb');
     const [neighbourGLTF] = await loadModels('PanelWithHinges.glb'); // the one sliding in (and opacity-ing :cat2:)
+    const [cableGLTF] = await loadModels('Cable.glb');
     // replace the above with CompletePanel.glb
 
     // Rotate to point towards us with corner
@@ -51,6 +52,7 @@ export default async (containerSelector: string) => {
     const middleObj = new Object3D();
     const bottomObj = new Object3D();
     const neighbourObj = new Object3D();
+    const cableObj = new Object3D();
 
     topLabel.position.x += 0.25;
     topLabel.position.z -= 0.25;
@@ -79,12 +81,19 @@ export default async (containerSelector: string) => {
 
     neighbourObj.add(neighbourGLTF.scene);
 
-    /**
-     * Camera settings
-     */
+    cableObj.add(cableGLTF.scene);
+    cableObj.rotateY(-Math.PI / 2);
+    cableObj.position.x -= 0.01;
 
-    const axesHelper = new AxesHelper(5);
-    scene.add(axesHelper);
+    const cableMaterials = new Set();
+    cableGLTF.scene.traverse((child) => {
+        if (child instanceof Mesh) {
+            cableMaterials.add(child.material);
+            child.material.transparent = true;
+            child.material.opacity = 0;
+        }
+    });
+
     /**
      * ADD EM ALL TO THE SCENE
      */
@@ -94,12 +103,18 @@ export default async (containerSelector: string) => {
     scene.add(bottomObj);
 
     scene.add(neighbourObj);
+    scene.add(cableObj);
 
     /**
      * Event handlers
      */
 
+   
+
     const labelMaterials = extractMaterials(topLabel, middleLabel, bottomLabel);
+
+
+
 
     const parentContainer: HTMLElement = document.querySelector(containerSelector)! as HTMLElement;
 
@@ -220,6 +235,14 @@ export default async (containerSelector: string) => {
         duration: 1000,
         easing: 'easeInOutExpo'
     }, '-=750');
+
+    // TODO Find a better way to select material
+    // Fade in cable 
+    tl.add({
+        targets: cableMaterials.values().next().value,
+        opacity: 1,
+        duration: 1000,        
+    }, '-=0');
 
     // // Slide it back out
     // tl.add({
