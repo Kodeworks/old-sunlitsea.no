@@ -1,4 +1,4 @@
-import { MathUtils, Object3D, Mesh, RGB_S3TC_DXT1_Format, } from "three";
+import { MathUtils, Object3D, Mesh, Group, } from "three";
 
 // Something strange with this library, but this works and is how it's supposed to be used according to the documentation.
 // @ts-ignore
@@ -170,7 +170,7 @@ export default async (containerSelector: string) => {
      * TIMELINE
      * From anime.js
      */
-    const TIMELINE_DURATION = 9000;
+    const TIMELINE_DURATION = 12000;
 
     // Set up timeline
     const tl = anime.timeline({
@@ -254,7 +254,9 @@ export default async (containerSelector: string) => {
     tl.add({
         targets: camera.position,
         x: 1.04,
-        duration: 500,
+        duration: 1000,
+        easing: 'easeInOutExpo',
+        update: () => camera.updateProjectionMatrix()
     }, '-=0');
 
     // Slide in the other panel
@@ -264,8 +266,8 @@ export default async (containerSelector: string) => {
         z: 0,
         y: 0,
         duration: 1000,
-        easing: 'easeInOutExpo'
-    }, '-=750');
+        easing: 'easeInOutCubic'
+    }, '-=1000');
 
     // TODO Find a better way to select material
     // Fade in cable 
@@ -297,40 +299,39 @@ export default async (containerSelector: string) => {
         duration: 250,
     }, '+=500');
    
+    //Fade out cable
+    tl.add({
+        targets: cableMaterials.values().next().value,
+        opacity: 0,
+        duration: 250
+    }, '-=0');
 
-    // // Slide it back out
-    // tl.add({
-    //     targets: neighbourObj.position,
-    //     x: 10,
-    //     z: -10,
-    //     duration: 1000,
-    //     easing: 'easeInOutExpo'
-    // });
+    //Fade out fillers
+    tl.add({
+        targets: fillerMaterials.values().next().value,
+        opacity: 0,
+        duration: 250
+    }, '-=250');
 
-    // // Ad-hoc solution to tilt the camera upwards without getting in a quarrel with Señor Euler
-    // camera.position.set(2.5, 1.5, 2.5);
-    // camera.lookAt(0, 0, 0);
+    // //Slide Neighbour back out
+    tl.add({
+        targets: neighbourObj.position,
+        x: 10,
+        duration: 1000,
+        easing: 'easeInCubic'
+    });
 
-    // // Move the camera up and out
-    // tl.add({
-    //     targets: camera.position,
-    //     x: 2.5,
-    //     y: 1.5,
-    //     z: 2.5,
-    //     duration: 500,
-    //     update: () => camera.updateProjectionMatrix()
-    // });
-
-    // // Pan camera to origo
-    // tl.add({
-    //     targets: camera.rotation,
-    //     x: camera.rotation.x,
-    //     y: camera.rotation.y,
-    //     z: camera.rotation.z,
-    //     duration: 500,
-    //     update: () => camera.updateProjectionMatrix()
-    // }, '-=500');
-
+    // //Center camera again
+    tl.add({
+        targets: camera.position,
+        y: 1,
+        x: 0,
+        z: 4,
+        duration: 1000,
+        easing: 'easeInOutExpo',
+        update: () => camera.updateProjectionMatrix()
+    }, '-=500');  
+    
     /**
      * PERFORM THE RENDERING
      */
