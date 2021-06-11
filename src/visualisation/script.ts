@@ -33,7 +33,6 @@ export default async (containerSelector: string) => {
     /**
      * Text labels
      */
-
     const topLabel = await svgToGroup("top.svg");
     const middleLabel = await svgToGroup("middle.svg");
     const bottomLabel = await svgToGroup("bottom.svg");
@@ -41,30 +40,11 @@ export default async (containerSelector: string) => {
     const cableLabel = await svgToGroup("middle.svg");
     const fillerLabel = await svgToGroup("bottom.svg");
 
-    topLabel.scale.y *= -1;
-    topLabel.scale.multiplyScalar(0.01);
-    topLabel.position.y += 1.05;
-
-    middleLabel.scale.y *= -1;
-    middleLabel.scale.multiplyScalar(0.01);
-    middleLabel.position.y += 1.05;
-
-    bottomLabel.scale.y *= -1;
-    bottomLabel.scale.multiplyScalar(0.01);
-    bottomLabel.position.y += 1.05;
-
-    hingeLabel.scale.y *= -1;
-    hingeLabel.scale.multiplyScalar(0.01);
-    hingeLabel.position.y += 1.05;
-    
-    cableLabel.scale.y *= -1;
-    cableLabel.scale.multiplyScalar(0.01);
-    cableLabel.position.y += 1.05;
-    
-    fillerLabel.scale.y *= -1;
-    fillerLabel.scale.multiplyScalar(0.01);
-    fillerLabel.position.y += 1.05;
-
+    // Flipping and scaling labels
+    [topLabel, middleLabel, bottomLabel, hingeLabel, cableLabel, fillerLabel].forEach(x => {
+            x.scale.multiplyScalar(0.01);
+            x.scale.y *= -1;
+        });
 
     const topObj = new Object3D();
     const middleObj = new Object3D();
@@ -74,24 +54,37 @@ export default async (containerSelector: string) => {
     const fillerObj = new Object3D();
 
     topLabel.position.x += 0.25;
+    topLabel.position.y += 1.0;
     topLabel.position.z -= 0.25;
     topLabel.rotateY(Math.PI / 4);
 
     middleLabel.position.x -= 1.2;
+    middleLabel.position.y += 0.68;
     middleLabel.position.z += 2.3;
-    middleLabel.position.y -= 0.32;
     middleLabel.rotateY(Math.PI / 4);
 
     bottomLabel.position.x += 1.00;
+    bottomLabel.position.y += 0.30;
     bottomLabel.position.z -= 0.20;
-    bottomLabel.position.y -= 0.70;
     bottomLabel.rotateY(Math.PI / 4);
 
+    hingeLabel.scale.multiplyScalar(0.75);
+    hingeLabel.position.y += 0.73;
+    hingeLabel.position.z += 1.05;
+    hingeLabel.position.x -= 0.5;
     hingeLabel.rotateY(Math.PI / 2);
+
+    cableLabel.scale.multiplyScalar(0.6);
+    cableLabel.position.y += 0.77;
+    cableLabel.position.z += 0.5;
+    cableLabel.position.x += 2;
     cableLabel.rotateY(Math.PI / 2);
+
+    fillerLabel.scale.multiplyScalar(0.9);
+    fillerLabel.position.y += 0.4;
+    fillerLabel.position.x += 1;
+    fillerLabel.position.z += 0.01;
     fillerLabel.rotateY(Math.PI / 2);
-
-
 
     topObj.add(topLabel, solarPanelGLTF.scene);
     middleObj.add(middleLabel, topGLTF.scene);
@@ -302,7 +295,7 @@ export default async (containerSelector: string) => {
         targets: secondLabelMaterials,
         opacity: 0,
         duration: 250,
-    }, '+=250');
+    }, '+=500');
    
 
     // // Slide it back out
