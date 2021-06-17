@@ -1,12 +1,6 @@
 <template>
   <header>
-
-    <!-- TODO Do some branching based on internet connection? -->
-    <!-- <video autoplay muted loop poster="../assets/images/jumbotronBackgroundVideoPoster.png" >
-      <source src="../assets/images/jumbotronBackgroundVideo.mp4" type="video/mp4">
-    </video> -->
-
-    <video autoplay muted loop preload="metadata">
+    <video autoplay muted loop poster="../assets/images/jumbotronBackgroundVideoPoster_smaller.png">
       <source src="../assets/images/jumbotronBackgroundvideo-smaller.mp4" type="video/mp4">
     </video>
 
