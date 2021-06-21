@@ -105,7 +105,7 @@
     <mask id="clip">
       <rect
         id="clipRect"
-        width="3000"
+        width="650"
         height="400"
         style="fill:rgb(255,255,255);stroke-width:3;stroke:rgb(0,0,0)"
       />
@@ -114,65 +114,64 @@
 </template>
 
 <script>
-import anime from 'animejs/lib/anime.es.js'
-// const _ = require('lodash');
+import anime from 'animejs/lib/anime.es.js';
+import { MathUtils } from 'three';
 
+// const _ = require('lodash');
+const lerp = MathUtils.lerp;
 
 export default {
   name: 'RoadmapSVG',
   mounted() {
     const TIMELINE_DURATION = 1000;
 
-    console.log("MOUNTED");
+    console.log('MOUNTED');
 
     const tl = anime.timeline({
-        easing: 'easeInOutSine',
-        duration: TIMELINE_DURATION,
-        autoplay: false
+      easing: 'easeInSine',
+      duration: TIMELINE_DURATION,
+      autoplay: false,
     });
 
     tl.add({
       targets: '#clipRect',
       width: 3000,
-      duration: 1000
-    })
-    const sectionElement = document.getElementById("roadmapSection");
+      duration: 1000,
+    });
+    const sectionElement = document.getElementById('roadmapSection');
 
+    let scrollPercentage = 0;
     const onScroll = () => {
+      scrollPercentage =
+        sectionElement.scrollLeft /
+        (sectionElement.scrollWidth - sectionElement.offsetWidth);
+
       const rect = sectionElement.getBoundingClientRect();
       if (rect.top < 0) {
-        console.log("SCROLL SIDEWAYS");
-
         // TODO Find a way to scroll sideways
         // TODO Start sideways scroll when rect. top < 0, end when reached the right => continue down
       }
-      
     };
 
-    document.addEventListener("scroll", onScroll, 10, { passive: false });    
-  }
+    document.addEventListener('scroll', onScroll, 10, { passive: false });
+
+    let animationPercentage = 0;
+
+    const render = () => {
+      requestAnimationFrame(render);
+
+      animationPercentage = lerp(animationPercentage, scrollPercentage, 0.1);
+      tl.seek(animationPercentage * TIMELINE_DURATION);
+    };
+
+    render();
+  },
 };
-
-
-
 </script>
 
 <style scoped lang="scss">
-@keyframes fadeSvg {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 3000;
-  }
-}
 svg {
   height: 100%;
-}
-
-#clipRect {
-  width: 0;
-  animation: 10s ease-out 0s 1 fadeSvg;
 }
 
 #roadmap-line {
