@@ -17,8 +17,8 @@ const lerp = MathUtils.lerp;
 export default async (containerSelector: string) => {
     const [scene, camera, renderer] = setup();
 
-    const [topGLTF, solarPanelGLTF, bottomGLTF] = await loadModels('Top.glb', 'SolarPanel.glb', 'Bottom.glb');
-    const [neighbourGLTF] = await loadModels('PanelWithHinges.glb'); // the one sliding in (and opacity-ing :cat2:)
+    const [topGLTF, solarPanelGLTF, bottomGLTF] = await loadModels('Top.glb', 'SolarPanel_smaller.glb', 'Bottom.glb');
+    const [neighbourGLTF] = await loadModels('PanelWithHinges_smaller.glb'); // the one sliding in (and opacity-ing :cat2:)
     const [cableGLTF] = await loadModels('Cable.glb');
     const [fillerGLTF] = await loadModels('Filler.glb');
     // replace the above with CompletePanel.glb
@@ -70,7 +70,7 @@ export default async (containerSelector: string) => {
 
     hingeLabel.scale.multiplyScalar(0.75);
     hingeLabel.position.y += 0.73;
-    hingeLabel.position.z += 1.05;
+    hingeLabel.position.z -= 1.05;
     hingeLabel.position.x -= 0.5;
     hingeLabel.rotateY(Math.PI / 2);
 
@@ -262,7 +262,7 @@ export default async (containerSelector: string) => {
     // Slide in the other panel
     tl.add({
         targets: neighbourObj.position,
-        x: 2.06,
+        x: 0,
         z: 0,
         y: 0,
         duration: 1000,
