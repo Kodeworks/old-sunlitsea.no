@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section id="roadmapSection">
     <RoadmapSVG/>
   </section>
 </template>
@@ -16,8 +16,8 @@ export default {
   section {
     @apply h-screen overflow-x-scroll py-72 pl-48 lg:pl-96 bg-black;
 
-    svg {
-      @apply max-w-none h-full;
-    }
+    // svg {
+    //   @apply max-w-none h-full;
+    // }
   }
 </style>
