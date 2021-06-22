@@ -1,5 +1,10 @@
 <template>
-  <svg viewBox="0 0 3165 346" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    id="svgTest"
+    viewBox="0 0 3165 346"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       id="roadmap-line"
       d="M644 298.882C856.483 268.596 840.011 4.65728 1017.47 32.273C1120.14 48.2509 1151.67 128.947 1240.95 175.755C1330.24 222.563 1632.68 235.765 1647.42 126.107C1662.16 16.4497 1693.33 -4.10308 1749.41 35.2516C1805.49 74.6064 1830.91 31.0136 1892.51 133.058C1954.12 235.102 2023.34 304.523 2067 245.261C2110.66 186 2161.81 138.027 2254 121.5C2393.9 96.4208 2373.99 392.831 2555.48 301.976C2736.96 211.12 2730.64 161.924 2828.32 150.434C2926.01 138.945 3181.11 209.705 3165.3 196.607"
@@ -116,6 +121,13 @@
 <script>
 import anime from 'animejs/lib/anime.es.js';
 import { MathUtils } from 'three';
+// import * as ScrollMagic from 'scrollmagic';
+// import { TweenMax, TimelineMax, Power0 } from 'gsap';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+// import { ScrollMagicPluginGsap } from 'scrollmagic-plugin-gsap';
+
+// ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax);
 
 // const _ = require('lodash');
 const lerp = MathUtils.lerp;
@@ -123,9 +135,33 @@ const lerp = MathUtils.lerp;
 export default {
   name: 'RoadmapSVG',
   mounted() {
+    const svgTest = document.getElementById('svgTest');
+    const svgWidth = svgTest.getBoundingClientRect().width;
+
+    const ww = window.innerWidth;
+    const percentage = ((svgWidth - ww) / svgWidth) * 100;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.to('#svgTest', {
+      xPercent: -percentage, // Edit this to decide how far it will scroll before going vertically again
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#roadmapSection',
+        start: 'top top',
+        scrub: true,
+        pin: true,
+        invalidateOnRefresh: true,
+        anticipatePin: 1,
+        onUpdate: ({ progress }) => animateYellowLine(progress),
+      },
+    });
+
     const TIMELINE_DURATION = 1000;
 
-    console.log('MOUNTED');
+    function animateYellowLine(progress) {
+      scrollPercentage = progress;
+    }
 
     const tl = anime.timeline({
       easing: 'easeInSine',
@@ -138,23 +174,8 @@ export default {
       width: 3000,
       duration: 1000,
     });
-    const sectionElement = document.getElementById('roadmapSection');
 
     let scrollPercentage = 0;
-    const onScroll = () => {
-      scrollPercentage =
-        sectionElement.scrollLeft /
-        (sectionElement.scrollWidth - sectionElement.offsetWidth);
-
-      const rect = sectionElement.getBoundingClientRect();
-      if (rect.top < 0) {
-        // TODO Find a way to scroll sideways
-        // TODO Start sideways scroll when rect. top < 0, end when reached the right => continue down
-      }
-    };
-
-    document.addEventListener('scroll', onScroll, 10, { passive: false });
-
     let animationPercentage = 0;
 
     const render = () => {
@@ -172,6 +193,7 @@ export default {
 <style scoped lang="scss">
 svg {
   height: 100%;
+  overflow: hidden;
 }
 
 #roadmap-line {

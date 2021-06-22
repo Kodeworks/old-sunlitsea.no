@@ -1075,6 +1075,11 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
+"@types/gsap@^1.20.1":
+  "integrity" "sha512-i9nUsnS32+VTgoX5IlaCYukJpCoB3c6h3bZvO67aIRdb3z8NFTWgeUDpQutLyb1ujowp6nw37qLQNvEowqq8yw=="
+  "resolved" "https://registry.npmjs.org/@types/gsap/-/gsap-1.20.2.tgz"
+  "version" "1.20.2"
+
 "@types/http-proxy@^1.17.5":
   "integrity" "sha512-GNkDE7bTv6Sf8JbV2GksknKOsk7OznNYHSdrtvPJXO0qJ9odZig6IZKUi5RFGi6d1bf6dgIAe4uXi3DBc7069Q=="
   "resolved" "https://registry.npmjs.org/@types/http-proxy/-/http-proxy-1.17.5.tgz"
@@ -4754,6 +4759,11 @@
   "resolved" "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.2.6.tgz"
   "version" "4.2.6"
 
+"gsap@^3.7.0":
+  "integrity" "sha512-8JI7pcFj0pgMzwqChARiHf7EIIZp1QrQBP74M2p2NpQLiAeIhQsrJWIRiwmA2JWkkNe0I2BiQF5ZhJvpyJVJDA=="
+  "resolved" "https://registry.npmjs.org/gsap/-/gsap-3.7.0.tgz"
+  "version" "3.7.0"
+
 "gzip-size@^5.0.0":
   "integrity" "sha512-FNHi6mmoHvs1mxZAds4PpdCS6QG8B4C1krxJsMutgxl5t3+GlRTzzI3NEkifXx2pVsOvJdOGSmIgDhQ55FwdPA=="
   "resolved" "https://registry.npmjs.org/gzip-size/-/gzip-size-5.1.1.tgz"
@@ -8065,6 +8075,18 @@
     "@types/json-schema" "^7.0.4"
     "ajv" "^6.12.2"
     "ajv-keywords" "^3.4.1"
+
+"scrollmagic-plugin-gsap@^1.0.4":
+  "integrity" "sha512-OLeo4J6V9wvnRP03/LJkgb5qkHIOzSckWX3hJ+Hh3uPJIfwttxCRRr4+w16WHPCQwZidUA9eEbtKeR7kyjdHVg=="
+  "resolved" "https://registry.npmjs.org/scrollmagic-plugin-gsap/-/scrollmagic-plugin-gsap-1.0.4.tgz"
+  "version" "1.0.4"
+  dependencies:
+    "@types/gsap" "^1.20.1"
+
+"scrollmagic@^2.0.8":
+  "integrity" "sha512-UYXEGBPVLziovXl3FjHGkY9c4UXKUKopIdXwWR2JapWxCo0U345wYegi7rcsv5vHf/ktc1bSNWy4QRFiV+Yccw=="
+  "resolved" "https://registry.npmjs.org/scrollmagic/-/scrollmagic-2.0.8.tgz"
+  "version" "2.0.8"
 
 "select-hose@^2.0.0":
   "integrity" "sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo="
