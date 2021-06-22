@@ -10,7 +10,7 @@
       </p>
     </div>
     <iframe
-        src="https://www.youtube-nocookie.com/embed/tiyVhSERi-g"
+        src="https://www.youtube-nocookie.com/embed/tiyVhSERi-g?modestbranding=1"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
     />
