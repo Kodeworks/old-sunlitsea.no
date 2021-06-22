@@ -1,11 +1,11 @@
 <template>
   <article>
-    <div>
-      <div>
-        <img :src="imagePath" :alt="'Portrait of ' + name"/>
+    <div id="container">
+      <div id="imageContainer">
+        <img :src="imagePath" :alt="'Portrait of ' + name" />
       </div>
 
-      <div>
+      <div id="nameRole">
         <span>{{ name }}</span>
         <small>{{ role }}</small>
         <a :href="'mailto:' + email">{{ email }}</a>
@@ -13,62 +13,72 @@
     </div>
 
     <div>
-      <p>{{ description }}</p>
+      <p id="description">{{ description }}</p>
     </div>
   </article>
 </template>
 
 <script>
 export default {
-  name: "TeamMember",
+  name: 'TeamMember',
   // NB: image-path is converted to imagePath to make it a valid JS variable
-  props: ['name', 'role', 'email', 'image-path', 'description']
-}
+  props: ['name', 'role', 'email', 'image-path', 'description'],
+};
 </script>
 
 <style scoped lang="scss">
 article {
-  @apply my-auto flex flex-col flex-shrink-0 flex-grow-0 mr-8;
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  flex-grow: 0;
+  margin-right: 2rem;
   flex-basis: 25%;
+}
 
-  // Image + Name/role
-  div:first-child {
-    @apply flex flex-grow-0;
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
-    // Image container
-    div:first-child {
-      @apply flex-auto h-72 pr-4 pb-4;
+#container {
+  display: flex;
+  flex-grow: 0;
+}
 
-      img {
-        @apply object-cover h-full w-full;
+#imageContainer {
+  flex: 1 1 auto;
+  height: 18rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+}
 
-        // Only supported in Chrome as of now, but adding for those who use that.
-        aspect-ratio: 1/1;
-      }
-    }
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
-    // Name/role
-    div:nth-child(2) {
-      span {
-        @apply font-normal;
-      }
-
-      small, a {
-        @apply text-gray-600;
-      }
-
-      span, small, a {
-        @apply block;
-      }
-    }
-
-    // Paragraph
-    div:nth-child(3) {
-    }
+#nameRole {
+  span {
+    font-weight: 400;
+    display: block;
   }
 
-  p {
-    @apply block flex-grow-0;
+  small,
+  a {
+    --tw-text-opactiy: 1;
+    color: rgba(75, 85, 99, var(--tw-text-opactiy));
+    display: block;
   }
+}
+
+#description {
+  display: block;
+  white-space: normal;
+  flex-grow: 0;
 }
 </style>
