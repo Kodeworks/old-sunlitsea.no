@@ -10,7 +10,10 @@
   "dependencies": {
     "animejs": "^3.2.1",
     "core-js": "^3.6.5",
+    "gsap": "^3.7.0",
     "lodash": "^4.17.21",
+    "scrollmagic": "^2.0.8",
+    "scrollmagic-plugin-gsap": "^1.0.4",
     "three": "^0.128.0",
     "vue": "^3.0.0",
     "vue-class-component": "^8.0.0-0"

@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <RoadmapSVG/>
+  <section id="roadmapSection">
+    <RoadmapSVG />
   </section>
 </template>
 
@@ -14,10 +14,20 @@ export default {
 
 <style scoped lang="scss">
   section {
-    @apply h-screen overflow-x-scroll py-72 pl-48 lg:pl-96 bg-black;
+    // @apply h-screen overflow-x-scroll py-72 pl-48 lg:pl-96 bg-black;
 
-    svg {
-      @apply max-w-none h-full;
-    }
+    height: 100vh;
+    padding-top: 18rem;
+    padding-bottom: 18rem;
+    background-color: black;
+
+    // svg {
+    //   @apply max-w-none h-full;
+    // }
   }
+
+  #roadmapSection {
+    overflow-x: hidden;
+  }
+
 </style>
