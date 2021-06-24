@@ -33,9 +33,9 @@ export default async (containerSelector: string) => {
     /**
      * Text labels
      */
-    const topLabel = await svgToGroup("top.svg");
-    const middleLabel = await svgToGroup("middle.svg");
-    const bottomLabel = await svgToGroup("bottom.svg");
+    const topLabel = await svgToGroup("pil1hvit.svg");
+    const middleLabel = await svgToGroup("pil2hvit.svg");
+    const bottomLabel = await svgToGroup("pil3hvit.svg");
     const hingeLabel = await svgToGroup("top.svg");
     const cableLabel = await svgToGroup("middle.svg");
     const fillerLabel = await svgToGroup("bottom.svg");
@@ -53,19 +53,19 @@ export default async (containerSelector: string) => {
     const cableObj = new Object3D();
     const fillerObj = new Object3D();
 
-    topLabel.position.x += 0.25;
-    topLabel.position.y += 1.0;
-    topLabel.position.z -= 0.25;
+    topLabel.position.x += 0.85;
+    topLabel.position.y += 1.25;
+    topLabel.position.z -= 0;
     topLabel.rotateY(Math.PI / 4);
 
-    middleLabel.position.x -= 1.2;
-    middleLabel.position.y += 0.68;
-    middleLabel.position.z += 2.3;
+    middleLabel.position.x -= 2.7;
+    middleLabel.position.y += 1.1;
+    middleLabel.position.z += 3.8;
     middleLabel.rotateY(Math.PI / 4);
 
-    bottomLabel.position.x += 1.00;
-    bottomLabel.position.y += 0.30;
-    bottomLabel.position.z -= 0.20;
+    bottomLabel.position.x += 1.20;
+    bottomLabel.position.y += 1.20;
+    bottomLabel.position.z += 0.30;
     bottomLabel.rotateY(Math.PI / 4);
 
     hingeLabel.scale.multiplyScalar(0.75);

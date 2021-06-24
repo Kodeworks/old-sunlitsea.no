@@ -1,4 +1,4 @@
-import {DoubleSide, Group, Mesh, MeshBasicMaterial} from "three";
+import {DoubleSide, Group, Mesh, MeshBasicMaterial, ShapeGeometry} from "three";
 import {SVGLoader} from "three/examples/jsm/loaders/SVGLoader";
 
 const loader = new SVGLoader();
@@ -20,16 +20,16 @@ export default async (pathToSvg: string): Promise<Group> => {
             depthWrite: false,
             transparent: true,
             opacity: 0,
-        });
+        }); 
 
-        p.subPaths.forEach(value => {
-            const geometry = SVGLoader.pointsToStroke(value.getPoints(), p.userData!.style);
-            if (geometry) {
-                const mesh = new Mesh(geometry, material);
-                group.add(mesh);
-            }
-        })
+        const shapes = SVGLoader.createShapes(p);
+
+        for (let j = 0; j < shapes.length; j++) {
+            const shape = shapes[j];
+            const geometry = new ShapeGeometry(shape);
+            const mesh = new Mesh(geometry, material);
+            group.add(mesh);
+        }
     });
-
     return group;
 };
