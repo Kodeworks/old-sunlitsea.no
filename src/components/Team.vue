@@ -148,13 +148,8 @@ export default {
       }, 500);
     };
 
-    const onResize = () => {
-      teamMembers[index].scrollIntoView();
-    }
-
     leftButton.addEventListener('click', leftButtonClick);
     rightButton.addEventListener('click', rightButtonClick);
-    window.addEventListener('resize', onResize);
   },
 };
 </script>
