@@ -70,16 +70,23 @@ export default {
 <style scoped lang="scss">
 section {
   @apply px-8 py-12 lg:px-24 mb-32;
+  @media only screen and (max-width: 800px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 
   h2 {
     @apply font-heading text-5xl mb-12 text-center;
   }
 
   div {
-    @apply flex justify-around flex-wrap px-32;
+    @apply flex justify-around flex-wrap px-8;
 
     img {
       @apply h-10 my-6 mx-2;
+      display: block;
+      width: auto;
+      height: 2.5rem;
     }
   }
 }
