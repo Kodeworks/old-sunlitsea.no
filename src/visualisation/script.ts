@@ -1,4 +1,4 @@
-import { MathUtils, Object3D, Mesh, Group, } from "three";
+import { MathUtils, Object3D, Mesh, } from "three";
 
 // Something strange with this library, but this works and is how it's supposed to be used according to the documentation.
 // @ts-ignore
@@ -16,6 +16,10 @@ const lerp = MathUtils.lerp;
 // Use async so we can use await in the function body.
 export default async (containerSelector: string) => {
     const [scene, camera, renderer] = setup();
+
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+        camera.fov = 120; // Hack
+    }
 
     const [topGLTF, solarPanelGLTF, bottomGLTF] = await loadModels('Top.glb', 'SolarPanel_smaller.glb', 'Bottom.glb');
     const [neighbourGLTF] = await loadModels('PanelWithHinges_smaller.glb'); // the one sliding in (and opacity-ing :cat2:)
@@ -222,7 +226,7 @@ export default async (containerSelector: string) => {
         targets: labelMaterials,
         opacity: 0,
         duration: 250,
-    });
+    },   '+=250');
 
     // Move top panel down again
     tl.add({
