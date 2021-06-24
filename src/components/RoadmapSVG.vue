@@ -121,30 +121,27 @@
 <script>
 import anime from 'animejs/lib/anime.es.js';
 import { MathUtils } from 'three';
-// import * as ScrollMagic from 'scrollmagic';
-// import { TweenMax, TimelineMax, Power0 } from 'gsap';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-// import { ScrollMagicPluginGsap } from 'scrollmagic-plugin-gsap';
 
-// ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax);
-
-// const _ = require('lodash');
 const lerp = MathUtils.lerp;
 
 export default {
   name: 'RoadmapSVG',
   mounted() {
-    const svgTest = document.getElementById('svgTest');
-    const svgWidth = svgTest.getBoundingClientRect().width;
+    function calculateScrollPercentage() {
+      const svgTest = document.getElementById('svgTest');
+      const svgWidth = svgTest.getBoundingClientRect().width;
 
-    const ww = window.innerWidth;
-    const percentage = ((svgWidth - ww) / svgWidth) * 100;
+      const ww = window.innerWidth;
+
+      return ((svgWidth - ww) / svgWidth) * 100;
+    }
 
     gsap.registerPlugin(ScrollTrigger);
 
     gsap.to('#svgTest', {
-      xPercent: -percentage, // Edit this to decide how far it will scroll before going vertically again
+      xPercent: () => -calculateScrollPercentage(), // Edit this to decide how far it will scroll before going vertically again
       ease: 'none',
       scrollTrigger: {
         trigger: '#roadmapSection',
@@ -160,7 +157,7 @@ export default {
     const TIMELINE_DURATION = 1000;
 
     function animateYellowLine(progress) {
-      scrollPercentage = progress;
+      scrollProgress = progress;
     }
 
     const tl = anime.timeline({
@@ -175,17 +172,19 @@ export default {
       duration: 1000,
     });
 
-    let scrollPercentage = 0;
+    let scrollProgress = 0;
     let animationPercentage = 0;
 
     const render = () => {
       requestAnimationFrame(render);
 
-      animationPercentage = lerp(animationPercentage, scrollPercentage, 0.1);
+      animationPercentage = lerp(animationPercentage, scrollProgress, 0.1);
       tl.seek(animationPercentage * TIMELINE_DURATION);
     };
 
     render();
+
+    window.addEventListener('resize', calculateScrollPercentage);
   },
 };
 </script>
