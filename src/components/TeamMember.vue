@@ -42,11 +42,21 @@ img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+
+  @media only screen and (max-width: 800px) {
+    width: 80%;
+    height: 80%;
+  }
 }
 
 #container {
   display: flex;
   flex-grow: 0;
+
+  @media only screen and (max-width: 800px) {
+    flex-direction: column;
+    padding-bottom: 1rem;
+  }
 }
 
 #imageContainer {
@@ -79,6 +89,8 @@ img {
 #description {
   display: block;
   white-space: normal;
-  flex-grow: 0;
+  line-height: normal;
+  height: auto;
+  // flex-grow: 0;
 }
 </style>

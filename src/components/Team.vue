@@ -148,8 +148,13 @@ export default {
       }, 500);
     };
 
+    const onResize = () => {
+      teamMembers[index].scrollIntoView();
+    }
+
     leftButton.addEventListener('click', leftButtonClick);
     rightButton.addEventListener('click', rightButtonClick);
+    window.addEventListener('resize', onResize);
   },
 };
 </script>
@@ -157,29 +162,26 @@ export default {
 <style scoped lang="scss">
 section {
   @apply px-8 py-12 lg:px-24 lg:pt-0 flex flex-col lg:h-auto;
-
   h2 {
     @apply text-4xl font-heading md:text-5xl;
   }
 }
 
 #teamMemberContainer {
-  // @apply flex my-auto h-1/2 overflow-x-auto lg:my-44;
   overflow-x: auto;
   display: flex;
   width: 30rem;
   overflow-x: hidden;
   overflow-y: hidden;
   white-space: nowrap;
+
+  @media only screen and (max-width: 800px) {
+    width: 70%;
+  }
 }
 
 .teamMember {
   min-width: 100%;
-  // background-color: royalblue;
-  // display: inline-block;
-  // margin-left: auto;
-  // // margin-right: auto;
-  // width: 50%;
 }
 
 .scrollButton {
