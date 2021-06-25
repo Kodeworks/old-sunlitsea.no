@@ -93,12 +93,20 @@ export default {
     const rightButton = document.getElementById('rightButton');
     const teamMemberContainer = document.getElementById('teamMemberContainer');
 
+    // Add copies at start and end of list, for smooth transitions
     const lastSlide = teamMembers[teamMembers.length - 1].outerHTML;
     const firstSlide = teamMembers[0].outerHTML;
     teamMemberContainer.insertAdjacentHTML('afterbegin', lastSlide);
     teamMemberContainer.insertAdjacentHTML('beforeend', firstSlide);
     teamMembers = document.querySelectorAll('.teamMember');
-    teamMembers[1].scrollIntoView({ block: 'nearest' });
+
+    // scroll to the first element (it would otherwise start at the copy added in front)
+    const teamMemberWidth = teamMembers[0].getBoundingClientRect().width;
+    const margin = window
+      .getComputedStyle(teamMembers[0], null)
+      .getPropertyValue('margin-right');
+    const parsedMargin = parseInt(margin, 10);
+    teamMemberContainer.scroll({ left: teamMemberWidth + parsedMargin }); // 32 is 2rem padding
 
     const leftButtonClick = () => {
       temporarilyDisableButtons();
@@ -148,8 +156,18 @@ export default {
       }, 500);
     };
 
+    const onResize = () => {
+      const rect = teamMembers[index].getBoundingClientRect();
+      const containerRect = teamMemberContainer.getBoundingClientRect();
+
+      const difference = containerRect.left - rect.left;
+      const targetScroll = teamMemberContainer.scrollLeft - difference;
+      teamMemberContainer.scroll({ left: targetScroll });
+    };
+
     leftButton.addEventListener('click', leftButtonClick);
     rightButton.addEventListener('click', rightButtonClick);
+    window.addEventListener('resize', onResize);
   },
 };
 </script>
