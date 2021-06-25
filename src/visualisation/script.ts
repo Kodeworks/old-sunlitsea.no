@@ -262,7 +262,7 @@ export default async (containerSelector: string) => {
      * TIMELINE
      * From anime.js
      */
-    const TIMELINE_DURATION = 12000;
+    const TIMELINE_DURATION = 11000;
 
     // Set up timeline
     const tl = anime.timeline({
@@ -379,7 +379,6 @@ export default async (containerSelector: string) => {
         duration: 250,
     }, "-=1000");
 
-    // TODO Find a better way to select material
     // Fade in cable
     tl.add({
         targets: [...cableMaterials],
