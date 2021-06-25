@@ -116,6 +116,14 @@ export default async (containerSelector: string) => {
         }
     });
 
+    const neighbourMaterials = new Set();
+    neighbourGLTF.scene.traverse((child) => {
+        if (child instanceof Mesh) {
+            neighbourMaterials.add(child.material);
+            child.material.transparent = true;
+            child.material.opacity = 0;
+        }
+    });
 
     fillerObj.add(fillerGLTF.scene);
     fillerObj.rotateY(-Math.PI / 2);
@@ -252,8 +260,6 @@ export default async (containerSelector: string) => {
         update: () => camera.updateProjectionMatrix()
     }, '-=250');    
 
-    // // TODO: Fade in label about power
-
     // Slide the camera to the connectors
     tl.add({
         targets: camera.position,
@@ -273,17 +279,24 @@ export default async (containerSelector: string) => {
         easing: 'easeInOutCubic'
     }, '-=1000');
 
+    // Fade in other panel
+    tl.add({
+        targets: [...neighbourMaterials],
+        opacity: 1,
+        duration: 250,
+    }, "-=1000");
+
     // TODO Find a better way to select material
     // Fade in cable 
     tl.add({
-        targets: cableMaterials.values().next().value,
+        targets: [...cableMaterials],
         opacity: 1,
         duration: 1000,        
     }, '-=0');
 
     // Fade in filler
     tl.add({
-        targets: fillerMaterials.values().next().value,
+        targets: [...fillerMaterials],
         opacity: 1,
         duration: 1000,
     }, '-=0');
@@ -305,14 +318,14 @@ export default async (containerSelector: string) => {
    
     //Fade out cable
     tl.add({
-        targets: cableMaterials.values().next().value,
+        targets: [...cableMaterials],
         opacity: 0,
         duration: 250
     }, '-=0');
 
     //Fade out fillers
     tl.add({
-        targets: fillerMaterials.values().next().value,
+        targets: [...fillerMaterials],
         opacity: 0,
         duration: 250
     }, '-=250');
@@ -324,6 +337,13 @@ export default async (containerSelector: string) => {
         duration: 1000,
         easing: 'easeInCubic'
     });
+
+    // Fade in other panel
+    tl.add({
+        targets: [...neighbourMaterials],
+        opacity: 0,
+        duration: 250,
+    }, "-=250");
 
     // //Center camera again
     tl.add({
