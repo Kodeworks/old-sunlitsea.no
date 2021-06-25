@@ -206,6 +206,7 @@ section {
   transform: translateY(45%);
   touch-action: manipulation;
   outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 #carouselContainer {
