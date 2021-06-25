@@ -161,7 +161,11 @@ export default {
     }
 
     const tl = anime.timeline({
-      easing: 'easeInSine',
+      easing: function() {
+        return function(t) {
+          return Math.pow(t, 1.2);
+        }
+      },
       duration: TIMELINE_DURATION,
       autoplay: false,
     });
