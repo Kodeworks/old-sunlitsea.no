@@ -22,13 +22,13 @@ export default {
     background-color: black;
 
     @media only screen and (max-height: 1000px) {
-      padding-top: 6rem;
-      padding-bottom: 6rem;
+      padding-top: 10rem;
+      padding-bottom: 10rem;
     }
 
     @media only screen and (max-height: 800px) {
-      padding-top: 4rem;
-      padding-bottom: 4rem;
+      padding-top: 8rem;
+      padding-bottom: 8rem;
     }
   }
 
