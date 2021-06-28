@@ -142,6 +142,7 @@ import anime from 'animejs/lib/anime.es.js';
 import { MathUtils } from 'three';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import _ from 'lodash';
 
 const lerp = MathUtils.lerp;
 
@@ -155,8 +156,6 @@ export default {
     ) {
       var mySVG = document.getElementById('svgTest');
       mySVG.setAttribute('viewBox', '0 0 2600 346');
-
-      // viewBox="0 0 3165 346"
     }
 
     function calculateScrollPercentage() {
@@ -176,6 +175,7 @@ export default {
       scrollTrigger: {
         trigger: '#roadmapSection',
         start: 'top top',
+        end: "+5000",
         scrub: true,
         pin: true,
         invalidateOnRefresh: true,
@@ -209,12 +209,12 @@ export default {
     let scrollProgress = 0;
     let animationPercentage = 0;
 
-    const render = () => {
+    const render = _.debounce(function () {
       requestAnimationFrame(render);
 
       animationPercentage = lerp(animationPercentage, scrollProgress, 0.1);
       tl.seek(animationPercentage * TIMELINE_DURATION);
-    };
+      }, 10);
 
     render();
 
