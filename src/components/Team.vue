@@ -37,50 +37,26 @@ export default {
           name: 'Per Lindberg',
           role: 'CEO',
           email: 'per@sunlitsea.no',
-          imagePath: require('@/assets/images/person.png'),
+          imagePath: require('@/assets/images/cv_per.jpg'),
           description:
-            'Per lorem ipsum dolor sit amet consectur adsciptig et. With an exceptional great team and support from our partners we are fit for this job and ready to revolutionize ocean based floating solar.',
+            'Per is CEO and one of two founders of Sunlit Sea. From more than 10 years of experience from the whole value chain of solar electricity, Per has acquired both in depth knowledge and holistic perspective in the solar field.',
         },
         {
-          name: 'Per Lindberg',
-          role: 'CEO',
-          email: 'per2@sunlitsea.no',
-          imagePath: require('@/assets/images/person.png'),
+          name: 'Eirik Larsen',
+          role: 'Tech lead IT',
+          email: 'eirik@sunlitsea.no',
+          imagePath: require('@/assets/images/cv_eirik.jpg'),
           description:
-            'Per lorem ipsum dolor sit amet consectur adsciptig et. With an exceptional great team and support from our partners we are fit for this job and ready to revolutionize ocean based floating solar.',
+            'Eirik is leading the IT software and hardware development projects in Sunlit Sea, and has co-founded Sunlit Sea together with Per. He has 16 years of experience as a programmer, and is also the CEO of Kodeworks.',
         },
         {
-          name: 'Per Lindberg',
-          role: 'CEO',
-          email: 'per3@sunlitsea.no',
-          imagePath: require('@/assets/images/person.png'),
+          name: 'Bjørn Riise',
+          role: 'Tech lead hydrodynamics',
+          email: 'bjorn@sunlitsea.no',
+          imagePath: require('@/assets/images/cv_bjorn.jpg'),
           description:
-            'Per lorem ipsum dolor sit amet consectur adsciptig et. With an exceptional great team and support from our partners we are fit for this job and ready to revolutionize ocean based floating solar.',
-        },
-        {
-          name: 'Per Lindberg',
-          role: 'CEO',
-          email: 'per4@sunlitsea.no',
-          imagePath: require('@/assets/images/person.png'),
-          description:
-            'Per lorem ipsum dolor sit amet consectur adsciptig et. With an exceptional great team and support from our partners we are fit for this job and ready to revolutionize ocean based floating solar.',
-        },
-        {
-          name: 'Per Lindberg',
-          role: 'CEO',
-          email: 'per5@sunlitsea.no',
-          imagePath: require('@/assets/images/person.png'),
-          description:
-            'Per lorem ipsum dolor sit amet consectur adsciptig et. With an exceptional great team and support from our partners we are fit for this job and ready to revolutionize ocean based floating solar.',
-        },
-        {
-          name: 'Per Lindberg',
-          role: 'CEO',
-          email: 'per6@sunlitsea.no',
-          imagePath: require('@/assets/images/person.png'),
-          description:
-            'Per lorem ipsum dolor sit amet consectur adsciptig et. With an exceptional great team and support from our partners we are fit for this job and ready to revolutionize ocean based floating solar.',
-        },
+            'Bjørn is a hydrodynamics expert with more than 12 years of experience from DNV. He runs research and sertification efforts in Sunlit Sea.',
+        }
       ],
     };
   },
