@@ -18,7 +18,7 @@ export default async (containerSelector: string) => {
     const [scene, camera, renderer] = setup();
 
     let onMobile;
-    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (navigator.userAgent.includes("Mac") && "ontouchend" in  document)){
         camera.fov = 110; // Hack
         onMobile = true;
     }
@@ -46,7 +46,6 @@ export default async (containerSelector: string) => {
     let junctionBoxLabel;
     let sealantLabel;
     let coolingLabel;
-
 
     if (onMobile) {
         topLabel = await svgToGroup("pil1hvit_mobile.svg");

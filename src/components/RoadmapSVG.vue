@@ -1,6 +1,6 @@
 <template>
   <svg
-    id="svgTest"
+    id="svgElement"
     viewBox="0 0 3165 346"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -154,12 +154,12 @@ export default {
         navigator.userAgent
       )
     ) {
-      var mySVG = document.getElementById('svgTest');
+      var mySVG = document.getElementById('svgElement');
       mySVG.setAttribute('viewBox', '0 0 2600 346');
     }
 
     function calculateScrollPercentage() {
-      const svgTest = document.getElementById('svgTest');
+      const svgTest = document.getElementById('svgElement');
       const svgWidth = svgTest.getBoundingClientRect().width;
 
       const ww = window.innerWidth;
@@ -169,7 +169,7 @@ export default {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    gsap.to('#svgTest', {
+    gsap.to('#svgElement', {
       xPercent: () => -calculateScrollPercentage(), // Edit this to decide how far it will scroll before going vertically again
       ease: 'none',
       scrollTrigger: {
