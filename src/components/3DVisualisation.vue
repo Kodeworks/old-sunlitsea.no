@@ -1,16 +1,16 @@
 <template>
   <section id="container">
     <div id="three" class="sticky"></div>
-    <Loader id="loader" />
+    <LoadingWheel id="loadingWheel" />
   </section>
 </template>
 
 <script>
 import script from '@/visualisation/script.ts';
-import Loader from './Loader.vue';
+import LoadingWheel from './LoadingWheel.vue';
 
 export default {
-  components: { Loader },
+  components: { LoadingWheel },
   name: '3DVisualisation',
   mounted() {
     script('#container');
@@ -18,14 +18,14 @@ export default {
     window.addEventListener('scroll', controlLoaderOpacity);
 
     window.addEventListener('load', () => {
-      document.getElementById('loader').style.display = 'none';
+      document.getElementById('loadingWheel').style.display = 'none';
       window.removeEventListener('scroll', controlLoaderOpacity);
     });
   },
 };
 
 const controlLoaderOpacity = () => {
-  const loader = document.getElementById('loader');
+  const loadingWheel = document.getElementById('loadingWheel');
   const rect = document.getElementById('container').getBoundingClientRect();
 
   if (
@@ -35,9 +35,9 @@ const controlLoaderOpacity = () => {
     const value = ((window.innerHeight / 2 - rect.top) / rect.height - 0.5) * 2;
     const alpha = 1 - Math.pow(value, 6);
 
-    loader.style.opacity = alpha;
+    loadingWheel.style.opacity = alpha;
   } else {
-    loader.style.opacity = 0;
+    loadingWheel.style.opacity = 0;
   }
 };
 </script>
@@ -51,7 +51,7 @@ section {
   }
 }
 
-#loader {
+#loadingWheel {
   position: fixed;
   top: 50%;
   left: 50%;
