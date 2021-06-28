@@ -69,13 +69,7 @@ export default async (containerSelector: string) => {
             x.scale.y *= -1;
         });
 
-    const topObj = new Object3D();
-    const middleObj = new Object3D();
-    const bottomObj = new Object3D();
-    const neighbourObj = new Object3D();
-    const cableObj = new Object3D();
-    const fillerObj = new Object3D();
-
+    // Place all labels on a decent position
     if (onMobile) {
         topLabel.scale.multiplyScalar(0.8);
         topLabel.position.x -= 1.3;
@@ -160,6 +154,14 @@ export default async (containerSelector: string) => {
         coolingLabel.rotateX(-Math.PI / 15);
     }
 
+    // Initalize the objects to be shown, and add the labels to them
+    const topObj = new Object3D();
+    const middleObj = new Object3D();
+    const bottomObj = new Object3D();
+    const neighbourObj = new Object3D();
+    const cableObj = new Object3D();
+    const fillerObj = new Object3D();
+
     topObj.add(topLabel, solarPanelGLTF.scene);
     middleObj.add(middleLabel, topGLTF.scene);
     bottomObj.add(bottomLabel, bottomGLTF.scene);
@@ -177,6 +179,14 @@ export default async (containerSelector: string) => {
     cableObj.rotateY(-Math.PI / 2);
     cableObj.position.x -= 0.01;
 
+    fillerObj.add(fillerGLTF.scene);
+    fillerObj.rotateY(-Math.PI / 2);
+
+    const secondFillerObj = fillerObj.clone();
+    secondFillerObj.add(coolingLabel);
+    secondFillerObj.position.x += 2.05;
+
+    // Extract materials to be able to manipulate the opacity
     const cableMaterials = new Set();
     cableGLTF.scene.traverse((child) => {
         if (child instanceof Mesh) {
@@ -195,9 +205,6 @@ export default async (containerSelector: string) => {
         }
     });
 
-    fillerObj.add(fillerGLTF.scene);
-    fillerObj.rotateY(-Math.PI / 2);
-
     const fillerMaterials = new Set();
     fillerGLTF.scene.traverse((child) => {
         if (child instanceof Mesh) {
@@ -207,9 +214,6 @@ export default async (containerSelector: string) => {
         }
     });
 
-    const secondFillerObj = fillerObj.clone();
-    secondFillerObj.add(coolingLabel);
-    secondFillerObj.position.x += 2.05;
     /**
      * ADD EM ALL TO THE SCENE
      */
@@ -222,15 +226,6 @@ export default async (containerSelector: string) => {
     scene.add(cableObj);
     scene.add(fillerObj);
     scene.add(secondFillerObj);
-
-    // const planeGeometry = new PlaneGeometry(100 , 100);
-    // const planeMaterial = new MeshStandardMaterial({ color: 0x111111, side: DoubleSide });
-    // const plane = new Mesh(planeGeometry, planeMaterial);
-    // plane.rotateX(- Math.PI / 2);
-    // plane.position.y -= 2;
-
-    // scene.add(plane);
-
 
     /**
      * Event handlers
