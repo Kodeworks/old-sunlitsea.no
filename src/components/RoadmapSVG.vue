@@ -42,7 +42,7 @@ export default {
       )
     ) {
       var mySVG = document.getElementById('svgElement');
-      mySVG.setAttribute('viewBox', '0 0 2900 346');
+      mySVG.setAttribute('viewBox', '0 0 2850 346');
     }
 
     function calculateScrollPercentage() {
@@ -80,7 +80,7 @@ export default {
     const tl = anime.timeline({
       easing: function() {
         return function(t) {
-          return Math.pow(t, 1.2);
+          return Math.pow(t, 1.01);
         };
       },
       duration: TIMELINE_DURATION,
