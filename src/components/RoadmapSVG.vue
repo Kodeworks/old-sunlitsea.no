@@ -49,7 +49,6 @@ export default {
   mounted() {
     function findImageWidth() {
       const image = document.getElementById('roadmapImage');
-      console.log(image.getBoundingClientRect().width);
       return image.getBoundingClientRect().width;
     }
 

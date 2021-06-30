@@ -2,7 +2,7 @@
   "name": "sunlit-sea",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kodeworks.github.io/sunlitsea.no/",
+  "homepage": "https://kodeworks.github.io/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",

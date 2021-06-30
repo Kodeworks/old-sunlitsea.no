@@ -32,6 +32,14 @@ dist needs to be removed from .gitignore
 
 This will push the dist folder to the gh-pages branch, which is deployed by github pages.
 
+If some refs failed: 
+
+`git checkout master`
+`git subtree split --prefix dist -b gh-pages`
+`git push -f origin gh-pages:gh-pages`
+`git branch -D gh-pages`
+
+
 <br></br>
 # Editing SVG
 
