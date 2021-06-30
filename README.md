@@ -25,6 +25,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Deployment
 
+dist needs to be removed from .gitignore
+
+`npm run build`
 `git subtree push --prefix dist origin gh-pages`
 
 <br></br>
