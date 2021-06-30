@@ -30,6 +30,8 @@ dist needs to be removed from .gitignore
 `npm run build`
 `git subtree push --prefix dist origin gh-pages`
 
+This will push the dist folder to the gh-pages branch, which is deployed by github pages.
+
 <br></br>
 # Editing SVG
 
@@ -56,13 +58,21 @@ Including an SVG is handled by svgToGroup.ts, which converts an svg file to a gr
 <br></br>
 ## Editing of Roadmap Image
 
-There's a template for roadmap svg ion src/assets
+There's a template for the different roadmap svg's in src/assets, one for desktop and one for mobile.
+
 
 1. Open the template in a vector graphics program. 
 2. Make the wanted changes
 3. Save the new version as the new template (SVG)
 4. Export the image as png, double the amount of pixels to avoid blurriness
+	- You will need png for: 
+		- roadmap image, without line, for desktop
+		- roadmap image, without line, for mobile
+		- roadmap line for desktop
+		- roadmap line for mobile
 5. Repeat for the mobile version of the image
+
+
 
 
 Note: It's probably best to convert text to curves and merge similar parts together. Merging will give everything the same material, so merge accordingly.This makes it easier to deactivate layers you don't want to export. 
