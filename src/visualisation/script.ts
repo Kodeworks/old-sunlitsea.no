@@ -131,22 +131,22 @@ export default async (containerSelector: string) => {
         bottomLabel.rotateY(Math.PI / 4);
         bottomLabel.rotateX(-Math.PI / 15);
 
-        junctionBoxLabel.scale.multiplyScalar(0.75);
-        junctionBoxLabel.position.x += 0.90;
-        junctionBoxLabel.position.y += 0.8;
-        junctionBoxLabel.position.z += 2.9;
+        junctionBoxLabel.scale.multiplyScalar(0.6);
+        junctionBoxLabel.position.x += 1.0;
+        junctionBoxLabel.position.y += 0.7;
+        junctionBoxLabel.position.z += 2.2;
         junctionBoxLabel.rotateY(Math.PI / 2);
         junctionBoxLabel.rotateX(-Math.PI / 15);
 
-        sealantLabel.scale.multiplyScalar(0.75);
-        sealantLabel.position.y += 0.8;
-        sealantLabel.position.z -= 2.0;
+        sealantLabel.scale.multiplyScalar(0.6);
+        sealantLabel.position.y += 0.6;
+        sealantLabel.position.z -= 1.5;
         sealantLabel.position.x += 0.9;
         sealantLabel.rotateY(Math.PI / 2);
         sealantLabel.rotateX(-Math.PI / 15);
 
 
-        coolingLabel.scale.multiplyScalar(0.75);
+        coolingLabel.scale.multiplyScalar(0.6);
         coolingLabel.position.y -= 0.0;
         coolingLabel.position.x += 1;
         coolingLabel.position.z += 1.5;
