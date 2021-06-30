@@ -19,7 +19,9 @@ export default {
     height: 100vh;
     padding-top: 18rem;
     padding-bottom: 18rem;
-    background-color: black;
+    background-color: black;    
+
+   
 
     @media only screen and (max-height: 1000px) {
       padding-top: 10rem;
@@ -30,6 +32,11 @@ export default {
       padding-top: 8rem;
       padding-bottom: 8rem;
     }
+
+     @media only screen and (max-height: 1000px) and (orientation: landscape) {
+          padding-top: 0;
+          padding-bottom: 0;
+    }    
   }
 
   #roadmapSection {
