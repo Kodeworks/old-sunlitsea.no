@@ -1,17 +1,27 @@
 <template>
   <div id="imageContainer">
-    <img
-      class="roadmapItem"
-      id="roadmapImage"
-      src="../assets/roadmap_image_larger.png"
-      alt="Roadmap Image"
-    />
-    <img
-      class="roadmapItem"
-      id="roadmapLine"
-      src="../assets/roadmap_line_larger.png"
-      alt="Roadmap Line"
-    />
+    <picture>
+      <source
+        srcset="../assets/roadmap_image_larger.png"
+        media="(min-width: 1000px)"
+      />
+      <img
+        id="roadmapImage"
+        class="roadmapItem"
+        src="../assets/roadmap_image_mobile.png"
+      />
+    </picture>
+    <picture>
+      <source
+        srcset="../assets/roadmap_line_larger.png"
+        media="(min-width: 1000px)"
+      />
+      <img
+        id="roadmapLine"
+        class="roadmapItem"
+        src="../assets/roadmap_line_mobile.png"
+      />
+    </picture>
     <svg id="clip">
       <clipPath id="clipPath">
         <rect
@@ -37,15 +47,6 @@ const lerp = MathUtils.lerp;
 export default {
   name: 'RoadmapSVG',
   mounted() {
-    if (
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      )
-    ) {
-      var mySVG = document.getElementById('roadmapImage');
-      mySVG.setAttribute('viewBox', '0 0 2850 346');
-    }
-
     function findImageWidth() {
       const image = document.getElementById('roadmapImage');
       console.log(image.getBoundingClientRect().width);
@@ -58,8 +59,6 @@ export default {
 
       return imageWidth - ww;
     }
-
-
 
     gsap.registerPlugin(ScrollTrigger);
 
@@ -85,11 +84,7 @@ export default {
     }
 
     const tl = anime.timeline({
-      easing: function() {
-        return function(t) {
-          return Math.pow(t, 1.01);
-        };
-      },
+      easing: 'easeOutSine',
       duration: TIMELINE_DURATION,
       autoplay: false,
     });
@@ -114,9 +109,7 @@ export default {
 
     render();
 
-    function updateYellowLineTarget() {
-      
-    }
+    function updateYellowLineTarget() {}
 
     window.addEventListener('resize', calculateScrollPercentage);
     window.addEventListener('resize', updateYellowLineTarget);
@@ -134,27 +127,22 @@ export default {
 #roadmapImage {
   position: absolute;
   height: 100%;
-  // white-space: nowrap;
-  // clip-path: url(#clipPath);
 }
 
 #roadmapLine {
   position: absolute;
   height: 100%;
-  // white-space: nowrap;
   clip-path: url(#clipPath);
 }
 
 #clip {
   position: absolute;
   height: 100%;
-  // width: 900px;
 }
 
 #clipRect {
   position: absolute;
   height: 100%;
-  // width: 100%;
 }
 
 #clipPath {
@@ -162,12 +150,6 @@ export default {
   height: 100%;
   width: 100%;
 }
-
-// .roadmapItem {
-//   @media only screen and (max-width: 800px) {
-//     transform: translateX(-400px);
-//   }
-// }
 
 #titleText {
   @media only screen and (max-width: 800px) {

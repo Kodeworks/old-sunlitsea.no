@@ -23,7 +23,9 @@ yarn lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+### Deployment
 
+`git subtree push --prefix dist origin gh-pages`
 
 <br></br>
 # Editing SVG
@@ -49,24 +51,21 @@ To include an SVG in code, open the SVG in your text editor and copy the content
 Including an SVG is handled by svgToGroup.ts, which converts an svg file to a group, hvich then can be used in the 3js application.
 
 <br></br>
-## Editing of Roadmap SVG
+## Editing of Roadmap Image
 
 There's a template for roadmap svg ion src/assets
 
-1. Follow the general procedure for editing an SVG, but additionally:
-	- Ungroup everything, if not already ungrouped
-	- To ease working with the svg, we want to merge as many curves as possible:	 
-		- Title text should be alone
-		- Title year should be alone
-		- Roadmap line should be alone
-		- Merge all other years together
-		- Merge all white text together
-2. Export the svg to a new file in the project
-3. Remove everything outside \<svg>
-	- Most likely the two first lines
-4. Change the attributes inside the \<svg> to the ones in the template
-5. Go to the bootom and add the \<mask> that you find in the bottom of the template
-	- The mask is used to draw the yellow line
-6. Make sure that ids and class names looks correct compared with the template
-	- Everything but "title text" and "title year" should have class "roadmapItem"
-7. Change the new SVG element with the one in RoadmapSVG.vue
+1. Open the template in a vector graphics program. 
+2. Make the wanted changes
+3. Save the new version as the new template (SVG)
+4. Export the image as png, double the amount of pixels to avoid blurriness
+5. Repeat for the mobile version of the image
+
+
+Note: It's probably best to convert text to curves and merge similar parts together. Merging will give everything the same material, so merge accordingly.This makes it easier to deactivate layers you don't want to export. 
+
+
+
+
+
+
