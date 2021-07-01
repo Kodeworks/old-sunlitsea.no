@@ -39,6 +39,10 @@ If some refs failed:
 `git push -f origin gh-pages:gh-pages`
 `git branch -D gh-pages`
 
+You might have to set the custom domain in github pages again after publishing:
+
+github->settings->pages: Write "sunlitsea.no" in Custom domain and press save
+
 
 <br></br>
 # Editing SVG
