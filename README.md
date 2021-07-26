@@ -28,6 +28,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 dist needs to be removed from .gitignore
 
 `npm run build`
+
+Commit the dist folder, so it can be pushed.
+
 `git subtree push --prefix dist origin gh-pages`
 
 This will push the dist folder to the gh-pages branch, which is deployed by github pages.
