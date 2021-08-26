@@ -10,10 +10,9 @@
         From manufacturing to deployment
       </h2>
       <p>
-        Sunlit Sea recently deployed prototype 2 of our floating solar
-        solution in the freezing water of the Oslo Fjord. Even at this stage,
-        it's easy to see that our end game logistics solution seems within
-        reach.
+        Our quick manufacturing and deployment process is what makes Sunlit Sea stand out.
+        By preassembling the floats they can easily be transported and deployed on
+        water. This leads to easy logistics and low capital binding.
       </p>
     </div>
   </section>

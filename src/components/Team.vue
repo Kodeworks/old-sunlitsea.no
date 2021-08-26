@@ -55,7 +55,7 @@ export default {
           email: 'bjorn@sunlitsea.no',
           imagePath: require('@/assets/images/cv_bjorn.jpg'),
           description:
-            'Bjørn is a hydrodynamics expert with more than 12 years of experience from DNV. He runs research and sertification efforts in Sunlit Sea.',
+            'Bjørn is a hydrodynamics expert with more than 12 years of experience from DNV. He runs research and certification efforts in Sunlit Sea.',
         }
       ],
     };
