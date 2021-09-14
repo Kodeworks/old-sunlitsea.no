@@ -18,8 +18,8 @@
           src="../assets/images/previewImage2.png"
           alt="A grid of floaters on the water."
         />
-        <a href="https://iiot.kodeworks.no"
-          >Preview a virtual installation
+        <a href="https://ops.sunlitsea.no"
+          >Live view our installations
           <ArrowLeft />
         </a>
       </div>
