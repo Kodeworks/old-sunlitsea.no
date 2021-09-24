@@ -75,6 +75,7 @@ Including an SVG is handled by svgToGroup.ts, which converts an svg file to a gr
 
 There's a template for the different roadmap svg's in src/assets, one for desktop and one for mobile.
 
+Alternatively, the latest roadmap can be found in a [Figma project](https://www.figma.com/file/b7WSsvhpBtwLhJO0ugSHwd/sunlitsea.no-roadmap?node-id=0%3A1). 
 
 1. Open the template in a vector graphics program. 
 2. Make the wanted changes
