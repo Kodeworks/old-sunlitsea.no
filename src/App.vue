@@ -4,6 +4,7 @@
   <Visualisation/>
   <ManufacturingVideo/>
   <PrototypeVideo/>
+  <Quoter/>
   <Roadmap/>
   <About/>
   <Team/>
@@ -17,6 +18,7 @@ import PreviewInstallation from "@/components/PreviewInstallation";
 import Visualisation from '@/components/3DVisualisation'
 import ManufacturingVideo from "@/components/ManufacturingVideo";
 import PrototypeVideo from "@/components/PrototypeVideo";
+import Quoter from "@/components/Quoter";
 import Roadmap from "@/components/Roadmap";
 import About from "@/components/About";
 import Team from "@/components/Team";
@@ -30,6 +32,7 @@ export default {
     Partners,
     Team,
     About,
+    Quoter,
     Roadmap,
     Header,
     PreviewInstallation,
