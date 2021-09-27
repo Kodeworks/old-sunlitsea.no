@@ -61,6 +61,10 @@ export default {
           src: require("@/assets/partners/solstrom.jpg"),
           alt: "Solstrom"
         },
+        {
+          src: require("@/assets/partners/strukturplast.png"),
+          alt: "Strukturplast"
+        },
       ]
     }
   }

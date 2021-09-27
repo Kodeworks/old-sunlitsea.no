@@ -13,6 +13,15 @@
           :image-path="person.imagePath"
           class="teamMember"
         />
+      <div class="teamMember consultants">        
+        <h2>Consultants</h2>
+        <span>Graham Muter: Industrial processes</span>
+        <span>Jan Burak: IT developer</span>
+        <span>Ole Marius Forbord: Electrical engineering</span>
+        <span>Rune Holmgren: Micro- and electrical engineering</span>
+        <span>Simen Moen Storvik: Big data sensor analysis</span>
+        <span>Wilco Hekkert: B2B sales</span>
+      </div>
       </div>
       <button id="leftButton" class="scrollButton">
         <i class="arrow left"></i>
@@ -56,7 +65,15 @@ export default {
           imagePath: require('@/assets/images/cv_bjorn.jpg'),
           description:
             'Bjørn is a hydrodynamics expert with more than 12 years of experience from DNV. He runs research and verification efforts in Sunlit Sea.',
-        }
+        },
+        {
+          name: 'Guillaume Kegelart',
+          role: 'Chief of industrialization',
+          email: 'guillaume@sunlitsea.no',
+          imagePath: require('@/assets/images/cv_guillaume.png'),
+          description:
+            'Guillaume is a mechanical engineer with experience in mechanical design, production assembly lines and project coordination. He\'s in charge of the design, development and deployment of Sunlit Sea\'s production tools.',
+        },
       ],
     };
   },
@@ -171,6 +188,28 @@ section {
 
 .teamMember {
   min-width: 100%;
+}
+
+.consultants {
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  flex-grow: 0;
+  margin-right: 2rem;
+  flex-basis: 25%;
+
+  h2 {
+    @apply text-2xl font-heading md:text-5xl;
+  }
+
+  span {
+    font-weight: 400;
+    display: block;
+    white-space: normal;  
+    @apply text-xl;
+  }
 }
 
 .scrollButton {
